@@ -41,13 +41,17 @@ public class MyController {
 		model.addAttribute("studentCredential", new StudentCredential());
 		return "login";
 	}
-
+	
+	
+//phele user ye khole ga
 	@RequestMapping(value ="/register" ,method=RequestMethod.GET)
 	public String registerPage(Model model){
 		model.addAttribute("student", new Student());
 		return "register";
 	}
 
+	
+	//then submit click krne pr yha redirect ho jega
 	@RequestMapping(value ="/registerSuccess" ,method=RequestMethod.POST)
 	public ModelAndView registerSuccess(@Valid @ModelAttribute("student") Student student,BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
@@ -58,6 +62,9 @@ public class MyController {
 		modelAndView.addObject("student", student);
 		return modelAndView;
 	}
+	
+	
+	
 	@RequestMapping(value ="/loginSuccess" ,method=RequestMethod.POST)
 	public ModelAndView loginSuccess(@Valid @ModelAttribute("studentCredential") StudentCredential studentCredential,BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
@@ -77,7 +84,7 @@ public class MyController {
 	
 	@ModelAttribute
 	public void headerMessage(Model model){
-		model.addAttribute("headerMessage", "Welcome to Starve Technology");
+		model.addAttribute("headerMessage", "Welcome to Collectcent");
 		
 		List<String> techList = new ArrayList<>();
 		techList.add("Hibernate");
@@ -95,4 +102,35 @@ public class MyController {
 		model.addAttribute("technologyList", techList);
 		model.addAttribute("citesList", citesList);
 	}
+	
+	
+	
+//	=====================================================================================================================
+//			
+//			update
+			
+			//phele user ye khole ga
+				@RequestMapping(value ="/update" ,method=RequestMethod.GET)
+				public String updatePage(Model model){
+					model.addAttribute("student", new Student());
+					return "update";
+				}
+				
+	
+				//then yha redirect ho jega
+				
+	@RequestMapping(value ="/updateSuccess" ,method=RequestMethod.POST)
+	public ModelAndView updateSuccess(@Valid @ModelAttribute("student") Student student,BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			return new ModelAndView("update");
+		}
+		getStudentService().updateStudent(student);
+		ModelAndView modelAndView = new ModelAndView("welcome");
+		modelAndView.addObject("student", student);
+		return modelAndView;
+	}
+	
+	
+	
+	
 }

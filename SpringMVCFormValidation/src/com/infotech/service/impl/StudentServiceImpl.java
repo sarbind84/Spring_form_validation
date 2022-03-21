@@ -21,6 +21,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentDAO;
 	}
 	
+	
 	@Override
 	public boolean registerStudent(Student student) {
 		boolean isRegister=false;
@@ -30,6 +31,14 @@ public class StudentServiceImpl implements StudentService {
 		return isRegister;
 	}
 
+	
+	public void updateStudent(Student student) {
+		boolean isRegister=false;
+		getStudentDAO().updateStudent(student);
+		 
+	}
+
+	
 	@Override
 	public Student validateStudentCredential(String email, String password) {
 		Student student = getStudentDAO().getStudentDetailsByEmailAndPassword(email, password);
